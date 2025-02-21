@@ -124,25 +124,36 @@ if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
 def validate_openai_key(api_key):
-    """Validate the OpenAI API key"""
+    """Validate OpenAI API Key"""
+    openai.api_key = api_key  # Set key
     try:
-        openai.api_key = api_key
-        # Make a small test request
-        openai.Model.list()
+        # Test request with a simple chat completion
+        openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "system", "content": "Say 'Hello'"}]
+        )
         return True
-    except:
+    except openai.error.AuthenticationError:
+        return False
+    except Exception as e:
+        st.error(f"Error: {e}")  # Debugging info
         return False
 
+
 def validate_pinecone_key(api_key):
-    """Validate the Pinecone API key"""
+    """Validate Pinecone API Key"""
     try:
         pc = Pinecone(api_key=api_key)
-        # Try to list indexes to validate key
-        pc.list_indexes()
-        return True
-    except:
+        indexes = pc.list_indexes()
+        if indexes:
+            return True
+        else:
+            st.warning("Pinecone API key is valid but no indexes found.")
+            return True
+    except Exception as e:
+        st.error(f"Pinecone Error: {e}")  # Debugging
         return False
-    
+
     
 def show_api_form():
     """Display the API keys input form"""
@@ -169,11 +180,22 @@ def show_api_form():
             openai_valid = validate_openai_key(openai_key)
             pinecone_valid = validate_pinecone_key(pinecone_key)
             
-            if openai_valid and pinecone_valid:
-                st.session_state["openai_key"] = openai_key
-                st.session_state["pinecone_key"] = pinecone_key
+            if openai_key:
+                if validate_openai_key(openai_key):
+                    st.session_state["openai_key"] = openai_key
+                else:
+                    st.error("Invalid OpenAI API Key.")
+
+            if pinecone_key:
+                if validate_pinecone_key(pinecone_key):
+                    st.session_state["pinecone_key"] = pinecone_key
+                else:
+                    st.error("Invalid Pinecone API Key.")
+
+            if st.session_state["openai_key"] and st.session_state["pinecone_key"]:
                 st.session_state["authenticated"] = True
                 st.rerun()
+
             else:
                 if not openai_valid:
                     st.error("Invalid OpenAI API key. Please check and try again.")
