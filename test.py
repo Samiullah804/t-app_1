@@ -130,9 +130,9 @@ hide_streamlit_style = """
         .st-emotion-cache-1v0mbdj, /* Hides "Created by ..." */
         .st-emotion-cache-16txtl3, /* Hides "Hosted with Streamlit" */
         .st-emotion-cache-1wrcr25, /* Hides profile card */
-        .st-emotion-cache-1hynsf2, /* Hides other Streamlit elements */
         .st-emotion-cache-18ni7ap, /* Hides floating profile icon */
-        .st-emotion-cache-6qob1r  /* Another profile-related element */ {
+        .st-emotion-cache-6qob1r,  /* Another profile-related element */
+        [data-testid="stDecoration"] /* Hides floating Streamlit badge */ {
             display: none !important;
         }
     </style>
