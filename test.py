@@ -127,10 +127,14 @@ hide_streamlit_style = """
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
         header {visibility: hidden;}
-        .st-emotion-cache-1v0mbdj {display: none !important;} /* Hides "Created by ..." */
-        .st-emotion-cache-16txtl3 {display: none !important;} /* Hides "Hosted with Streamlit" */
-        .st-emotion-cache-1wrcr25 {display: none !important;} /* Hides profile card */
-        .st-emotion-cache-1hynsf2 {display: none !important;} /* Hides other Streamlit elements */
+        .st-emotion-cache-1v0mbdj, /* Hides "Created by ..." */
+        .st-emotion-cache-16txtl3, /* Hides "Hosted with Streamlit" */
+        .st-emotion-cache-1wrcr25, /* Hides profile card */
+        .st-emotion-cache-1hynsf2, /* Hides other Streamlit elements */
+        .st-emotion-cache-18ni7ap, /* Hides floating profile icon */
+        .st-emotion-cache-6qob1r  /* Another profile-related element */ {
+            display: none !important;
+        }
     </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
