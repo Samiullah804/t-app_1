@@ -121,14 +121,6 @@ hide_streamlit_style = """
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-hide_streamlit_style = """
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-
 # Initialize session state
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
