@@ -122,6 +122,18 @@ hide_streamlit_style = """
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+hide_streamlit_footer = """
+    <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+        .st-emotion-cache-1v0mbdj {display: none !important;} /* Hides "Created by ..." */
+        .st-emotion-cache-16txtl3 {display: none !important;} /* Hides "Hosted with Streamlit" */
+    </style>
+"""
+st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
+
+
 # Initialize session state
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
