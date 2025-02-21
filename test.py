@@ -123,19 +123,9 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 hide_streamlit_style = """
-    <style>
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
-        .st-emotion-cache-1v0mbdj, /* Hides "Created by ..." */
-        .st-emotion-cache-16txtl3, /* Hides "Hosted with Streamlit" */
-        .st-emotion-cache-1wrcr25, /* Hides profile card */
-        .st-emotion-cache-18ni7ap, /* Hides floating profile icon */
-        .st-emotion-cache-6qob1r,  /* Another profile-related element */
-        [data-testid="stDecoration"] /* Hides floating Streamlit badge */ {
-            display: none !important;
-        }
-    </style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
