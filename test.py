@@ -3,6 +3,7 @@ import openai
 import pinecone
 import streamlit as st
 from pinecone import Pinecone
+from openai import OpenAIError
 from dotenv import load_dotenv
 from prompt import purpose, get_started
 from langchain.prompts import PromptTemplate
@@ -133,10 +134,11 @@ def validate_openai_key(api_key):
             messages=[{"role": "system", "content": "Say 'Hello'"}]
         )
         return True
-    except openai.error.AuthenticationError:
+    except OpenAIError as e:
+        st.error(f"OpenAI API Error: {e}")  # Show detailed error
         return False
     except Exception as e:
-        st.error(f"Error: {e}")  # Debugging info
+        st.error(f"Unexpected Error: {e}")  # Debugging info
         return False
 
 
